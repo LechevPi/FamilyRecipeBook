@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="section">
+    <p>La recette a été soumise avec succès.</p>
+    <p><strong>Merci de ta contribution !</strong></p>
+    <a href="/recipe/{{ recipe_name_normalized }}" class="btn"><p>Voir la nouvelle recette</p></a>
+    <a href="/" class="btn"><p>Retour au menu principal</p></a>
+    <a href="/recipe/add_recipe" class="btn"><p>Ajouter une autre recette</p></a>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+

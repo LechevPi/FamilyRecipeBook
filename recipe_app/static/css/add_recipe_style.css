@@ -1,0 +1,87 @@
+
+label, input, select {
+    display: inline-block;
+    margin: 5px auto;
+}
+
+.tag:hover {
+    cursor: pointer;
+}
+
+.section {
+    text-align: left;
+}
+
+h2 {
+    text-align: left;
+}
+
+
+.long {
+    width: 80%;
+}
+
+.standard {
+    width: 50%;
+}
+
+.short {
+    width: 50px;
+}
+
+.error-box {
+    display: none;
+    background-color: #f8d7da; /* Red color for error */
+    color: #721c24; /* Text color for error */
+    padding: 0.75rem 1.25rem;
+    border: var(--box-border);
+    border-radius: 0.25rem;
+    margin-top: 0.5rem; /* Adjust margin as needed */
+}
+
+.error-box.show {
+    display: block; /* Show the error box */
+}
+
+#ingredients-table {
+    width: 95%;
+    /* Add any other styling for the table */
+}
+
+#ingredients-table th:nth-child(1),
+#ingredients-table td:nth-child(1) {
+    width: 60%;
+}
+
+#ingredients-table th:nth-child(2),
+#ingredients-table td:nth-child(2),
+#ingredients-table th:nth-child(3),
+#ingredients-table td:nth-child(3) {
+    width: 20%;
+}
+
+.steps {
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+.step-number {
+    display: inline-block;
+    width: 30px; /* Adjust as needed */
+    text-align: right;
+    margin-right: 10px; /* Adjust as needed */
+    color: #888; /* Optional: Adjust the color of the numbering */
+}
+
+.availableTagsContainer {
+    display: inline-block;
+    width: 95%;
+    height: 100px;
+    overflow-y: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.recipe_img {
+    width: 80%;
+}

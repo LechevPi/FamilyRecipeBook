@@ -1,0 +1,460 @@
+/* Color code definition */
+
+:root {
+
+    /* colors */
+
+    --palette1: rgb(34, 87, 122); /*dark blue*/
+    --palette2: rgb(56, 163, 165); /*blue*/
+    --palette3: rgb(87, 204, 153); /*dark green*/
+    --palette4: rgb(128, 237, 153); /*green*/
+    --palette5: rgb(199, 249, 204); /*light green*/
+    --palette6: rgb(221, 161, 94); /*brown*/
+
+    --text-color: rgb(0, 0, 0); /*black*/
+
+    --background-color: rgb(253, 248, 243); /*very very very light brown*/
+    --background-color2: rgb(255, 253, 251); /*very very light brown*/
+    --background-color3: rgb(115, 112, 107); /*brown*/
+    --background-color4: rgb(245, 240, 235); /*very light brown*/
+
+    /* fontsize */
+
+    --fs-normal: 1rem;
+    --fs-big: 1.25rem;
+    --fs-title: clamp(1.25rem, 0.893rem + 1.905vw, 1.75rem);
+    --fs-header: clamp(1.25rem, 4vw + 0.5rem, 2.25rem);
+
+    /* margin padding */
+
+    --text-margin: 1em;
+    --text-padding: 0.5em;
+
+    --box-margin: 2rem;
+    --box-padding: 1rem;
+
+    /* border */
+    --border-radius: 0.5rem;
+
+}
+
+/* Base styles */
+
+body {
+    margin: 0px;
+    font-family: 'Source Sans Pro',sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color4);
+}
+
+p {
+    margin: 0.5em;
+}
+
+h2 {
+    display: inline-block;
+    font-size: var(--fs-title);
+    width: min(30ch, 90%);
+    text-align: center;
+    padding: 0.25em auto;
+    margin: 0.5rem;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.section {
+    display: block;
+    width: min(90%, 600px);
+    text-align: center;
+    background-color: var(--background-color2);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    box-shadow: 0px 10px 5px -4px var(--background-color3);
+    margin: min(2em, 5%) auto;
+    padding: min(1em, 3%);
+    z-index: 1;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    background-color: var(--palette1);
+    width: min(30ch, 80%);
+    padding: 1rem 3rem;
+    margin: 0.5em;
+    border-radius: var(--border-radius);
+    color: white;
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.searchBar {
+    border: 1px solid black;
+    padding: 10px 20px;
+    margin: 0.5em;
+    width: min(30ch, 80%);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: black;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.5em;
+    margin: 0.2em;
+    background-color: transparent;
+    border: 1px solid black;
+    color: black;
+    border-radius: 5px;
+}
+
+/* Colors for the categories */
+
+.entree {
+    border: 2px solid var(--palette1);
+}
+
+.recipeBox.entree h3 {
+    background-color: var(--palette1);
+    border: 2px solid var(--palette1);
+}
+
+.tag.entree {
+    background-color: var(--palette1);
+    border: 2px solid var(--palette1);
+}
+
+.plat_principal {
+    border: 2px solid var(--palette2);
+}
+
+.recipeBox.plat_principal h3 {
+    background-color: var(--palette2);
+    border: 2px solid var(--palette2);
+}
+
+.tag.plat_principal {
+    background-color: var(--palette2);
+    border: 2px solid var(--palette2);
+}
+
+.dessert {
+    border: 2px solid var(--palette3);
+}
+
+.recipeBox.dessert h3 {
+    background-color: var(--palette3);
+    border: 2px solid var(--palette3);
+}
+
+.tag.dessert {
+    background-color: var(--palette3);
+    border: 2px solid var(--palette3);
+}
+
+.aperitif {
+    border: 2px solid var(--palette4);
+}
+
+.recipeBox.aperitif h3 {
+    background-color: var(--palette4);
+    border: 2px solid var(--palette4);
+}
+
+.tag.aperitif {
+    background-color: var(--palette4);
+    border: 2px solid var(--palette4);
+}
+
+.boisson {
+    border: 2px solid var(--palette5);
+}
+
+.recipeBox.boisson h3 {
+    background-color: var(--palette5);
+    border: 2px solid var(--palette5);
+}
+
+.tag.boisson {
+    background-color: var(--palette5);
+    border: 2px solid var(--palette5);
+}
+
+.base_culinaire {
+    border: 2px solid var(--palette6);
+}
+
+.recipeBox.base_culinaire h3 {
+    background-color: var(--palette6);
+    border: 2px solid var(--palette6);
+}
+
+.tag.base_culinaire {
+    background-color: var(--palette6);
+    border: 2px solid var(--palette6);
+}
+
+.recipeBox {
+    position: relative;
+    display: inline-block;
+    width: max(150px, 20vw);
+    text-align: center;
+    margin: 1rem;
+    padding: 0px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    aspect-ratio: 1/1; /* Maintain a 1:1 aspect ratio */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: black;
+    z-index: 999;
+}
+
+.recipeBox .recipe_img {
+    position: absolute;
+    padding: 0px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    z-index: 998;
+}
+
+.recipeBox h3 {
+    border: 0px;
+    margin: 0px auto;
+    width: 100%;
+    position: absolute;
+    padding: 10px;
+    border-radius: 10px 10px 0px 0px;
+    box-sizing: border-box;
+    z-index: 999;
+}
+
+
+.recipeBox p {
+    margin: 0px;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    z-index: 999;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    border-radius: 0px 0px 10px 10px;
+}
+
+
+/* header */
+
+header {
+    top: 0;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    background-color: var(--background-color2);
+    position: sticky;
+    z-index: 1000;
+}
+
+/* top banner */
+
+.top-banner {                   /* Grid containing two columns */
+    margin: 0;
+    display: grid;
+    grid-template-columns: 10% 90%;
+    width: min(90%, 600px);
+    margin: 0 auto;
+    padding: var(--text-padding) 0;
+    z-index: -1;
+}
+
+.top-banner .dropdown {         /* Column 1: a menu logo appearing for screens below 720px */
+    grid-column: 1 / 2;
+    display: flex;
+    justify-content: center;
+    padding: auto auto;
+    position: relative;
+}
+
+.top-banner .dropdown img {     /* Image of the logo */
+    display: inline-block;
+    height: calc( 0.75 * var(--fs-header));
+}
+
+h1 {                            /* Column 2: the title of the page, always appearing */
+    grid-column: 2 / 3;
+    display: inline-block;
+    font-size: var(--fs-header);
+    text-align: center;
+    width: min(25ch, 100%);
+    padding: 0;
+    margin: auto 0;
+}
+
+.top-banner .dropdown .dropbtn {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.top-banner .dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 20ch;
+    z-index: 999;
+    padding: 0.5em;
+}
+
+
+/* Navigation bar*/
+
+nav {
+    padding: 0px;
+    border: 0px;
+    width: 100%;
+    display: block;
+    background-color: var(--background-color2);
+    font-size: 1rem;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: var(--background-color);
+    box-shadow: 0px 2px 6px var(--background-color3);
+    z-index: 1000;
+}
+
+nav ul {
+    padding: 0px;
+    margin: 5px 0px;
+    list-style-type: none;
+    display: inline-block;
+}
+
+
+nav ul li {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    padding: 0 0.5em;
+}
+
+nav a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 0.5em 0;
+}
+
+nav a:hover {
+    color: var(--palette1);
+    text-decoration: underline;
+}
+
+nav .dropdown-content {
+    display: none;
+    position: absolute;
+    width: 21ch;
+    left: 0;
+    top: 0;
+    z-index: 999;
+}
+
+nav .dropdown-content button {
+    display: block;
+    border: none;
+    background-color: var(--background-color2);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+nav .dropdown:hover .dropdown-content {
+  display: block;
+  background-color: var(--background-color2);
+  border: 1px solid black;
+  border-left: 2px solid black;
+}
+
+nav .dropdown:hover .dropdown-content p {
+    cursor: default;
+    padding: 0.5em calc(0.5em - 2px);
+    margin: 0;
+    text-align: left;
+    color: var(--palette1);
+    text-decoration: underline;
+}
+
+
+nav .dropdown-content button:hover{
+    color: var(--palette1);
+    text-decoration: underline;
+}
+
+
+@media only screen and (max-width: 720px) {
+    nav {
+        display: none;
+    }
+
+    .top-banner .dropdown .dropbtn {
+        display: flex;
+    }
+
+
+    .top-banner .dropdown-content button {
+        display: block;
+        border: none;
+        background-color: var(--background-color2);
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.25em 1em;
+    }
+
+    .top-banner .dropdown-content a {
+        display: block;
+        border: none;
+        text-decoration: none;
+        color: black;
+        background-color: var(--background-color2);
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.25em 0;
+    }
+
+    .top-banner .dropdown-content p {
+        display: block;
+        font-size: 1rem;
+        padding: 0.25em 0;
+        margin: 0;
+    }
+
+    .top-banner .dropdown:hover .dropdown-content {
+      display: block;
+      background-color: var(--background-color2);
+      border: 1px solid black;
+      border-left: 2px solid black;
+    }
+
+    .top-banner .dropdown-content button:hover{
+        color: var(--palette1);
+        text-decoration: underline;
+    }
+
+    .top-banner .dropdown-content a:hover {
+        color: var(--palette1);
+        text-decoration: underline;
+    }
+
+    header {
+        box-shadow: 0px 2px 4px var(--background-color3);
+    }
+}

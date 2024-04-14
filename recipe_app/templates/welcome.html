@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="section">
+    <h2> Bienvenu dans le livre de cuisine de la famille Lechevallier ! </h2>
+</div>
+
+<div class="section">
+    <p><strong>Tu cherches une recette?</strong></p>
+    <p>C'est par ici:  </p>
+    <input class="searchBar" type="text" id="searchInput" placeholder="Recherche...">
+    <p>Clique sur ce bouton pour <strong>ajouter une nouvelle recette: </strong></p>
+    <a href="/recipe/add_recipe" class="btn">Ajouter une recette</a>
+</div>
+
+    <div class="section">
+
+        <h2>Dernière recette ajoutée</h2>
+        <div class="tagList">
+            {% for tag in recipe_tags %}
+            <p class="tag {{ tag.tag_name_normalized }}">{{ tag.tag_name }}</p>
+            {% endfor %}
+        </div>
+        <p>"{{ last_recipe.description }}"</p>
+        <a href="/recipe/{{ last_recipe.recipe_name_normalized }}">
+            <div class="recipeBox {{ last_recipe.category_normalized }}">
+                <img class="recipe_img" src="{{ last_recipe.img_path}}" alt="Recipe Image">
+                <h3>{{ last_recipe.recipe_name }}</h3>
+                <p>{{ last_recipe.time_tot}} minutes</p>
+            </div>
+        </a>
+
+        <p>Clique sur la recette!</p>
+
+        <p>Ajoutée le <strong>{{ last_recipe['date_add'] }}</strong> par <strong>{{ last_recipe['author'] }}</strong></p>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Add event listener for "Enter" key press on search input field
+    document.getElementById("searchInput").addEventListener("keypress", function(event) {
+        // Check if the pressed key is "Enter"
+        if (event.key === "Enter") {
+            // Retrieve the value from the input field
+            var searchText = document.getElementById("searchInput").value.trim();
+            // Store the value in sessionStorage
+            sessionStorage.setItem('searchText', searchText);
+            // Redirect to the book/show page
+            window.location.href = '/book/show';
+        }
+    });
+</script>
+
+{% endblock %}

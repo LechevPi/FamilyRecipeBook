@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block second_style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/book_style.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="sideBar">
+    <div class="filterPannel">
+        <h2>Panneau des filtres</h2>
+        <br>
+        <p><strong>Filter par recherche:</strong></p>
+        <div id="searchBarContainer">
+
+            <input class="searchBar" type="text" id="searchInput" placeholder="Chercher...">
+        </div>
+        <br>
+        <p><strong>Filter par mot-clefs:</strong></p>
+        <div id="selectedTagContainer">
+            <p>Filtres selectionnés:</p>
+        </div>
+
+
+        <div id="unselectedTagContainer">
+            <br>
+            <p>Filtres disponibles:</p>
+            {% for tag in tag_list %}
+                <button class="tag {{ tag.tag_name_normalized }}" data-tagType="filt" data-filter="{{ tag.tag_name_normalized }}" data-initial-order="{{ tag.order }}">{{ tag.tag_name }}</button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="recipeContainer">
+    {% for r in recipe_list %}
+    <a href="/recipe/{{ r.recipe_name_normalized }}">
+        <div class="recipeBox {% for t in recipe_tags[r.recipe_name_normalized] %}{{ t.tag_name_normalized }} {% endfor %}">
+            <img class="recipe_img" src="{{ r.img_path }}" alt="Recipe Image">
+            <h3>{{ r.recipe_name }}</h3>
+            <p>{{ r.time_tot }} minutes</p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+<script src="{{ url_for('static', filename='js/book_script.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block second_style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe_style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="section">
+    <h2 class="page-title">{{ recipe.recipe_name }}</h2>
+    <img class="recipe_img" src="{{ recipe.img_path }}" alt="Recipe Image">
+    <div class="tagList">
+        {% for tag in recipe_tags %}
+        <p class="tag {{ tag.tag_name_normalized }}">{{ tag.tag_name }}</p>
+        {% endfor %}
+    </div>
+    <p>{{ recipe.description }}</p>
+    <p>Auteur de la recette: {{ recipe.author }} </p>
+</div>
+
+<div class="section">
+    <h2>Informations</h2>
+    <p>Recette pour <strong>{{ recipe.for_x_servings }}</strong> personnes</p>
+    <p>Temps de préparation: <strong>{{ recipe.time_prep }}</strong> minutes</p>
+    <p>Temps de repos: <strong>{{ recipe.time_rest }}</strong> minutes</p>
+    <p>Temps de cuisson: <strong>{{ recipe.time_cook }}</strong> minutes</p>
+</div>
+
+<div class="section">
+    <h2>Ingrédients</h2>
+    <ul>
+        {% for ingr in recipe.ingredient.split(';;') %}
+        {% set parts = ingr.split('_') %}
+            <li>{{ parts[0] }}: {{ parts[1] }} {{ parts[2] }}</li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+<div class="section">
+    <h2>Ustensiles</h2>
+    <ul>
+        {% for utensil in recipe.utensil.split(';;') %}
+            <li>{{ utensil }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="section">
+    <h2>Instructions</h2>
+    <ol>
+        {% for step in recipe.steps.split(';;') %}
+            <li>{{ step | safe }}</li>
+        {% endfor %}
+    </ol>
+</div>
+
+{% if recipe.tips %}
+<div class="section">
+    <h2>Astuces</h2>
+    <ul>
+        {% for tip in recipe.tips.split(';;') %}
+            <li>{{ tip }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<div class="section">
+    <h2>Modification de la recette</h2>
+    <a href="/recipe/modify_recipe/{{ recipe.recipe_name_normalized }}" class="btn">Modifier</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+
+{% block second_style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_recipe_style.css') }}">
+{% endblock %}
+
+{% block title %}Livre de recettes{% endblock %}
+
+{% block content %}
+    <form action="/recipe/add_recipe" method="post" enctype="multipart/form-data" onsubmit="return checkUniqueName()">
+
+        <div class="section">
+            <h2>Sauvegarde</h2>
+            <p>La sauvegarde n'est possible qu'une fois toute les informations remplies.</p>
+            <!-- Submit button -->
+            <input type="submit" value="Sauvegarder la recette" class="btn">
+            <!-- End Submit button -->
+        </div>
+
+        <div class="section">
+            <h2>Informations de base</h2><br>
+            <label for="recipe_name">Nom de la recette:</label>
+            <input class="long" id="recipe_name" name="recipe_name" required type="text"><br>
+
+            <div class="error-box" id="name-error">
+                <span class="error-message"></span>
+            </div>
+
+            <label for="for_x_servings">Pour combien de personnes:</label>
+            <input type="number" id="for_x_servings" name="for_x_servings" required class="short"><br>
+
+            <label for="category">Type de recette:</label>
+            <select id="category" name="category" required>
+                <option value="entree">Entrée</option>
+                <option value="plat_principal">Plat Principal</option>
+                <option value="dessert">Dessert</option>
+                <option value="aperitif">Apéritif</option>
+                <option value="boisson">Boisson</option>
+                <option value="base_culinaire">Base culinaire</option>
+            </select><br>
+
+            <!-- Author -->
+            <div class="author">
+                <label for="author">Auteur:</label>
+                <select id="author" name="author" required>
+                    <option value="Célestin">Célestin</option>
+                    <option value="Gilles">Gilles</option>
+                    <option value="Henri">Henri</option>
+                    <option value="Justine">Justine</option>
+                    <option value="Marie-Hélène">Marie-Hélène</option>
+                    <option value="Pierre">Pierre</option>
+                </select>
+            </div><br>
+            <!-- End Author -->
+
+        </div>
+
+        <div class="section">
+                <label for="recipe_description">Brève description de la recette:</label><br>
+                <textarea id="recipe_description" name="recipe_description" rows="5" class="long"></textarea>
+
+        </div>
+
+        <div class="section">
+            <h2>Timings</h2><br>
+
+            <label for="time_prep">Temps de préparation (en minutes):</label>
+            <input type="number" id="time_prep" name="time_prep" required class="short"><br>
+
+            <label for="time_rest">Temps de repos (en minutes):</label>
+            <input type="number" id="time_rest" name="time_rest" required class="short"><br>
+
+            <label for="time_cook">Temps de cuisson (en minutes):</label>
+            <input type="number" id="time_cook" name="time_cook" required class="short"><br>
+
+        </div>
+
+        <div class="section">
+            <h2>Ingrédients</h2>
+            <div class="ingredients">
+                <label>Liste des ingrédients:</label><br>
+                <table id="ingredients-table">
+                    <tr>
+                        <th>Ingrédient</th>
+                        <th>Qt.</th>
+                        <th>Unité</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="ingredient_name[]" required class="long"></td>
+                        <td><input type="number" name="ingredient_quantity[]" required min="0" class="long"></td>
+                        <td><input type="text" name="ingredient_unit[]" required class="long"></td>
+                    </tr>
+                </table>
+                <button type="button" onclick="addIngredientRow()">Ajouter un ingrédient</button>
+                <button type="button" onclick="deleteLastIngredient()">Supprimer le dernier ingredient</button><br>
+            </div>
+            <!-- End Ingredients -->
+        </div>
+
+        <div class="section">
+            <h2>Ustensiles</h2>
+            <div class="utensils">
+                <label for="utensils">Ustensiles nécessaires:</label><br>
+                <div id="utensils-container">
+                    <input type="text" id="utensils" name="utensils" required><br>
+                </div>
+                <button type="button" onclick="addUtensilField()">Ajouter un ustensile</button>
+                <button type="button" onclick="deleteLastUtensil()">Supprimer le dernier ustensile</button><br>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Préparation</h2>
+            <!-- Steps -->
+            <div class="steps">
+                <label for="steps">Étapes de préparation:</label><br>
+                <div id="steps-container">
+                    <div class="step">
+                        <span class="step-number">1.</span>
+                        <input type="text" id="steps" name="steps" required class="long"><br>
+                    </div>
+                </div>
+                <button type="button" onclick="addStepField()">Ajouter une étape</button>
+                <button type="button" onclick="deleteLastStep()">Supprimer la dernière étape</button><br>
+            </div>
+            <!-- End Steps -->
+        </div>
+
+        <div class="section">
+            <h2>Astuces</h2>
+            <div class="tips">
+                <label for="tips">Astuces - conseils supplémentaires:</label><br>
+                <div id="tips-container">
+                    <input type="text" id="tips" name="tips" class="long"><br>
+                </div>
+                <button type="button" onclick="addTipField()">Ajouter une astuce</button>
+                <button type="button" onclick="deleteLastTip()">Supprimer la dernière astuce</button><br>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h2>Tags</h2>
+            <p>Note: le type de recette, renseigné plus haut, sera automatiquement ajouté aux tags.</p>
+            <div class="tags" id="tagsContainer">
+                <label for="tags">Tags:</label><br>
+                <div id="tags-container-1">
+                    <input type="text" id="tags" name="tags" class="tagsInput" data-index="1">
+                    <div class="tagSuggestions" data-index="1"></div>
+                </div>
+             </div>
+
+            <button type="button" onclick="addTagField()">Ajouter un tag</button>
+            <button type="button" onclick="deleteLastTag()">Supprimer le dernier tag</button>
+
+
+            <p><strong>Liste des tags déjà utilisés</strong> (clique sur un tag pour le rajouter):</p>
+            <div class="availableTagsContainer">
+                {% for t in available_tags %}
+                    <button type="button" class="tag {{ t.tag_name_normalized }}" onclick="updateTagField('{{ t.tag_name }}')">{{ t.tag_name }}</button>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Images</h2><br>
+            <!-- Recipe image -->
+            <div class="recipe-image">
+                <label for="recipe_image">Image de la recette:</label><br>
+                <input type="file" id="recipe_image" name="recipe_image"><br>
+            </div><br>
+        </div>
+
+        <div class="section">
+            <!-- Submit button -->
+            <input type="submit" value="Sauvegarder la recette" class="btn">
+            <!-- End Submit button -->
+        </div>
+
+    </form>
+
+    <script src="{{ url_for('static', filename='js/add_recipe_script.js') }}"></script>
+
+    <script>
+
+        function normalizeNameString(inputString) {
+            if (!inputString) {
+                return inputString;
+            } else {
+                // Remove leading and trailing spaces, capitalize first letter
+                return inputString.trim().charAt(0).toUpperCase() + inputString.trim().slice(1);
+            }
+        }
+
+        function convertToAlphanumericLowercase(inputString) {
+            // Remove punctuation and convert to lowercase
+            const punctuationRegex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+            let alphanumericLowercase = inputString.replace(punctuationRegex, '').toLowerCase();
+
+            // Normalize Unicode characters and replace spaces with underscores
+            alphanumericLowercase = alphanumericLowercase.split(/\s+/)
+                .map(char => char.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '_'))
+                .join('_');
+
+            return alphanumericLowercase;
+        }
+
+        function checkUniqueName() {
+
+            var nameInput = document.getElementById("recipe_name").value; // Remove leading and trailing spaces
+            nameInput = normalizeNameString(nameInput);
+            nameInput = convertToAlphanumericLowercase(nameInput);
+
+
+            var existingNames = {{ existing_recipe_names|safe }};
+
+            var errorBox = document.getElementById("name-error");
+
+            if (existingNames.includes(nameInput)) {
+                errorBox.querySelector(".error-message").innerText = "Ce nom de recette est déjà utilisé!";
+                errorBox.classList.add("show"); // Show the error box
+                document.getElementById("recipe_name").focus(); // Focus on the input field
+                return false;  // Prevent form submission
+            } else {
+                errorBox.classList.remove("show"); // Hide the error box if name is unique
+                return true;  // Allow form submission
+            }
+        }
+    </script>
+
+{% endblock %}

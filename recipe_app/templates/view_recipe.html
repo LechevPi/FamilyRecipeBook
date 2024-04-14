@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recipe List</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Name normalized</th>
+            <th>Date Added</th>
+            <th>Servings</th>
+            <th>Category</th>
+            <th>Category str</th>
+            <th>Prep Time (min)</th>
+            <th>Rest Time (min)</th>
+            <th>Cook Time (min)</th>
+            <th>Total Time (min)</th>
+            <th>Ingredients</th>
+            <th>Utensils</th>
+            <th>Steps</th>
+            <th>Tips</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Image URL</th>
+        </tr>
+        {% for recipe in recipes %}
+        <tr>
+            <td>{{ recipe.id }}</td>
+            <td>{{ recipe.recipe_name }}</td>
+            <td>{{ recipe.recipe_name_normalized }}</td>
+            <td>{{ recipe.date_add }}</td>
+            <td>{{ recipe.for_x_servings }}</td>
+            <td>{{ recipe.category }}</td>
+            <td>{{ recipe.category_normalized }}</td>
+            <td>{{ recipe.time_prep }}</td>
+            <td>{{ recipe.time_rest }}</td>
+            <td>{{ recipe.time_cook }}</td>
+            <td>{{ recipe.time_tot }}</td>
+            <td>{{ recipe.ingredient }}</td>
+            <td>{{ recipe.utensil }}</td>
+            <td>{{ recipe.steps }}</td>
+            <td>{{ recipe.tips }}</td>
+            <td>{{ recipe.author }}</td>
+            <td>{{ recipe.description }}</td>
+            <td>{{ recipe.img_path }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
